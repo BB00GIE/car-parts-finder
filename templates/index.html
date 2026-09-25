@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Car Parts Finder</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f5f7fa;
+        margin: 0;
+        padding: 32px;
+        color: #1f2937;
+      }
+      .container {
+        max-width: 700px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 12px;
+        padding: 32px;
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+      }
+      h1 {
+        margin-top: 0;
+      }
+      form {
+        display: grid;
+        gap: 16px;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      input {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        box-sizing: border-box;
+      }
+      button {
+        padding: 12px 16px;
+        border: none;
+        border-radius: 8px;
+        background: #2563eb;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+      .result {
+        margin-top: 24px;
+        padding: 16px;
+        border-radius: 8px;
+        border-left: 6px solid #94a3b8;
+        background: #f8fafc;
+      }
+      .result.success {
+        border-left-color: #16a34a;
+        background: #f0fdf4;
+      }
+      .result.failure {
+        border-left-color: #dc2626;
+        background: #fef2f2;
+      }
+      .meta {
+        margin-top: 8px;
+        font-size: 0.95rem;
+        color: #475569;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Car Parts Finder</h1>
+      <p><a href="/catalog" style="color: #2563eb; text-decoration: none;">Manage catalog</a></p>
+
+      <form method="post">
+        <div class="row">
+          <div>
+            <label for="year">Year</label>
+            <input id="year" name="year" type="number" min="1900" max="2100" placeholder="2018" required>
+          </div>
+          <div>
+            <label for="make">Make</label>
+            <input id="make" name="make" type="text" placeholder="Honda" required>
+          </div>
+          <div>
+            <label for="model">Model</label>
+            <input id="model" name="model" type="text" placeholder="Civic" required>
+          </div>
+        </div>
+
+        <div>
+          <label for="part_number">Part Number</label>
+          <input id="part_number" name="part_number" type="text" placeholder="06560TGGA01" required>
+        </div>
+
+        <button type="submit">Check compatibility</button>
+      </form>
+
+      {% if result %}
+        <div class="result {% if result.fits %}success{% else %}failure{% endif %}">
+          <strong>{{ result.message }}</strong>
+          {% if result.fits %}
+            <div class="meta">Match type: {{ result.match_type }}</div>
+            <div class="meta">Source: {{ result.source }}</div>
+            {% if result.supplier_name %}
+              <div class="meta">Supplier: {{ result.supplier_name }}</div>
+            {% endif %}
+            {% if result.part_family %}
+              <div class="meta">Family: {{ result.part_family }}</div>
+            {% endif %}
+            {% if result.price %}
+              <div class="meta">Price: {{ result.price }}</div>
+            {% endif %}
+            {% if result.notes %}
+              <div class="meta">Notes: {{ result.notes }}</div>
+            {% endif %}
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </body>
+</html>

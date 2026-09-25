@@ -1,0 +1,35 @@
+{
+  "2018": {
+    "Honda": {
+      "Civic": {
+        "oem_part_numbers": ["06560-TGG-A01", "12345-HONDA-01"],
+        "oes_part_numbers": [
+          "06560TGGA01",
+          "A1-06560-TGG-A01",
+          {
+            "part_number": "11111ABC01",
+            "supplier_name": "Apex Auto",
+            "part_family": "brake",
+            "price": "89.99",
+            "source_type": "supplier",
+            "notes": "Aftermarket equivalent"
+          }
+        ]
+      }
+    },
+    "Toyota": {
+      "Corolla": {
+        "oem_part_numbers": ["04465-02170", "89485-02020"],
+        "oes_part_numbers": ["0446502170", "8948502020"]
+      }
+    }
+  },
+  "2020": {
+    "Ford": {
+      "Focus": {
+        "oem_part_numbers": ["B7GZ-7A095-AA", "HL3Z-5A234-AA"],
+        "oes_part_numbers": ["B7GZ7A095AA", "HL3Z5A234AA"]
+      }
+    }
+  }
+}

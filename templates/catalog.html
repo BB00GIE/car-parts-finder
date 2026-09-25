@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Catalog Manager</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f5f7fa;
+        margin: 0;
+        padding: 32px;
+        color: #1f2937;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 12px;
+        padding: 32px;
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+      }
+      h1 { margin-top: 0; }
+      form { display: grid; gap: 16px; }
+      .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+      label { display: block; font-weight: 600; margin-bottom: 8px; }
+      input, textarea {
+        width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px;
+      }
+      textarea { min-height: 90px; resize: vertical; }
+      button {
+        padding: 12px 16px; border: none; border-radius: 8px; background: #2563eb; color: white; cursor: pointer;
+      }
+      .message { margin-top: 20px; padding: 12px 16px; border-radius: 8px; background: #ecfdf5; color: #166534; }
+      a { display: inline-block; margin-bottom: 16px; color: #2563eb; text-decoration: none; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="/">Back to checker</a>
+      <h1>Catalog Manager</h1>
+
+      {% if message %}
+        <div class="message">{{ message }}</div>
+      {% endif %}
+
+      <form method="post" enctype="multipart/form-data">
+        <div class="row">
+          <div>
+            <label for="year">Year</label>
+            <input id="year" name="year" type="number" min="1900" max="2100">
+          </div>
+          <div>
+            <label for="make">Make</label>
+            <input id="make" name="make" type="text">
+          </div>
+          <div>
+            <label for="model">Model</label>
+            <input id="model" name="model" type="text">
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="supplier_name">Supplier name</label>
+            <input id="supplier_name" name="supplier_name" type="text" placeholder="Apex Auto">
+          </div>
+          <div>
+            <label for="part_family">Part family</label>
+            <input id="part_family" name="part_family" type="text" placeholder="brake">
+          </div>
+          <div>
+            <label for="price">Price</label>
+            <input id="price" name="price" type="text" placeholder="89.99">
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="source_type">Source type</label>
+            <input id="source_type" name="source_type" type="text" placeholder="supplier">
+          </div>
+        </div>
+
+        <div>
+          <label for="oem_part_numbers">OEM part numbers</label>
+          <textarea id="oem_part_numbers" name="oem_part_numbers" placeholder="06560-TGG-A01&#10;12345-HONDA-01"></textarea>
+        </div>
+
+        <div>
+          <label for="oes_part_numbers">OES part numbers</label>
+          <textarea id="oes_part_numbers" name="oes_part_numbers" placeholder="06560TGGA01&#10;A1-06560-TGG-A01"></textarea>
+        </div>
+
+        <div>
+          <label for="notes">Notes</label>
+          <textarea id="notes" name="notes" placeholder="Aftermarket equivalent&#10;Used for this model range"></textarea>
+        </div>
+
+        <button type="submit">Save catalog entry</button>
+      </form>
+
+      <hr style="margin: 32px 0;">
+
+      <form method="post" enctype="multipart/form-data">
+        <h2>Import CSV catalog</h2>
+        <label for="catalog_file">CSV file</label>
+        <input id="catalog_file" name="catalog_file" type="file" accept=".csv">
+        <button type="submit">Import catalog</button>
+      </form>
+    </div>
+  </body>
+</html>
